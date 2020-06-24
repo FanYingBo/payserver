@@ -4,21 +4,21 @@ SpringBoot Web 项目，用于完成游戏中不同类型的支付
 
 ## 项目结构
 
-|---com.coda.airtime																------CodaPay
+|---com.coda.airtime															------CodaPay
 
-|---com.last.pay																  ------支付项目根目录
+|---com.last.pay																  	------支付项目根目录
 
-|---com.last.pay.datasource											 ------数据原配置
+|---com.last.pay.base.datasource										------数据原配置
 
-|---com.last.pay.controller												------控制层
+|---com.last.pay.core.controller											------控制层
 
-|---com.last.pay.service													 ------业务逻辑层
+|---com.last.pay.core.service												------业务逻辑层
 
 ## 支持的支付类型
 
 1. 支付类型
 
-   com.last.pay.common.Constants.PayTypeConstants
+   com.last.pay.base.common.constants.Constants.PayTypeConstants
 
 ```java
 // IOS
@@ -49,7 +49,7 @@ public static final int Cambodia_CODAPAY_Wing = 12;
 
 2. 充值渠道（越南点卡子类）
 
-   com.last.pay.common.Constants.PayChannelConstants
+   com.last.pay.base.common.Constants.PayChannelConstants
 
 ```java
 public static final String pay_channel_param = "pay_channel";
@@ -63,7 +63,7 @@ public static final int BANG_LANG_CHANNEL = 4; // BangLang
 
 3. 充值平台（不同平台对应不同的点卡充值子类）
 
-   com.last.pay.common.Constants.PayPlatformConstants
+   com.last.pay.base.common.Constants.PayPlatformConstants
 
 ```java
 // 游戏旧渠道
@@ -88,7 +88,7 @@ public static final int WEB_BANG_LANG = 10;
 
 ## Rest接口（Controller层）
 
-1. com.last.pay.controller.PayController （支付接口）
+1. com.last.pay.core.controller.PayController （支付接口）
 
    * 测试用页面
 
@@ -122,7 +122,7 @@ public static final int WEB_BANG_LANG = 10;
 
    
 
-2. com.last.pay.controller.CallBackController（回调接口）
+2. com.last.pay.core.controller.CallBackController（回调接口）
 
    * CodaPay后端回调
 
@@ -188,7 +188,7 @@ public static final int WEB_BANG_LANG = 10;
 
    
 
-3. com.last.pay.controller.HeartBeatController
+3. com.last.pay.core.controller.HeartBeatController
 
    * 心跳检测
 
@@ -203,7 +203,7 @@ public static final int WEB_BANG_LANG = 10;
 
 ## 业务处理（Service 第三方处理）
 
-1. 不同的支付类型通过继承 *com.last.pay.handler.GeneralPayRequestHandler* 实现
+1. 不同的支付类型通过继承 *com.last.pay.core.handler.GeneralPayRequestHandler* 实现
 
 ```java
 	/**
@@ -234,7 +234,7 @@ public static final int WEB_BANG_LANG = 10;
 	public abstract boolean isSuccessPayOrder(ReplacementOrder replacementOrder);
 ```
 
-2. 不同的越南点卡支付渠道通过继承*com.last.pay.handler.channel.vietnam.PayChannelHandler* 实现
+2. 不同的越南点卡支付渠道通过继承*com.last.pay.core.handler.channel.vietnam.PayChannelHandler* 实现
 
 ```java
 	/**
@@ -256,7 +256,7 @@ public static final int WEB_BANG_LANG = 10;
 
 ## 错误码&错误信息
 
-请参考 *com.last.pay.common.CodeMsgType*
+请参考 *com.last.pay.base.CodeMsgType*
 
 ```java
 	SUCCESS(0,"充值成功"), // 越南：00
