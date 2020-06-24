@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.last.pay.core.db.mapper.webdb.DynamicPayPointMapper">
+ 	<select id="getAllDynamicPayPoint" resultType="com.last.pay.core.db.pojo.DynamicPayPoint" >
+		select 
+			id,
+			type,
+			point_name_usd pointNameUsd, 
+			point_name_vnd pointNameVnd, 
+			point_name_cny pointNameCny, 
+			point_name_Mmk pointNameMmk, 
+			point_name_thb pointNameThb, 
+			limit_day limitDay,
+			usd_orginal_gold usdOrginalGold,
+			usd_gold usdGold,
+			vnd_orginal_gold vndOrginalGold,
+			vnd_gold vndGold,
+			mmk_orginal_gold mmkOrginalGold,
+			mmk_gold mmkGold,
+			thb_orginal_gold thbOrginalGold,
+			thb_gold thbGold
+		from 
+			DynamicPayPoint
+	</select>
+	
+ </mapper>

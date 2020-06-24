@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.last.pay.core.db.mapper.userdb.UserPayPointMapper">
+	<select id="getUserPayPointsByUserIdAndPoint" resultType="com.last.pay.core.db.pojo.UserPayPoint">
+		select userid,point_name pointName,buy_count buyCount,buy_date buyDate, receive_date receiveDate,type from user_pay_point where userid=#{userId} and point_name=#{pointName}
+	</select>
+	<insert id="insertUserPayPoint" parameterType="com.last.model.user.UserPayPoint"> 
+		insert into user_pay_point(userid,point_name,buy_count,buy_date,receive_date,type) values (#{userid},#{pointName},#{buyCount},#{buyDate},#{receiveDate},#{type})
+	</insert>
+	
+	<update id="updateUserPayPoint">
+		update user_pay_point set buy_count=buy_count+1, buy_date=now(),receive_date=now() where userid=#{userId} and point_name=#{pointName}
+	</update>
+ </mapper>

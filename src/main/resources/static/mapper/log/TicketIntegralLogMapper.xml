@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.last.pay.core.db.mapper.logdb.TicketIntegralLogMapper">
+	<insert id="insertTicketIntegeralLog" useGeneratedKeys="true" keyProperty="id" parameterType="com.last.pay.core.db.pojo.TicketIntegralLog">
+		insert into ticket_integral_log 
+			(user_id,before_integral,integral,type,log_date) 
+		values(#{userId},#{beforeIntegral},#{integral},#{type},#{logDate})
+	</insert>
+ </mapper>

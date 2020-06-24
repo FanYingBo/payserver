@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.last.pay.core.db.mapper.gamedb.LevelConfigMapper">
+	<select id="getLevelConfigs" resultType="com.last.pay.core.db.pojo.LevelConfig">
+		select t1.`level`,(select sum(t2.experience) from LevelConfig t2 where t2.`level` &lt;= t1.level) experience from LevelConfig t1 order by level asc
+	</select>
+ </mapper>

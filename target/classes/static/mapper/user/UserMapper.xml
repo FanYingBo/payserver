@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.last.pay.core.db.mapper.userdb.UserMapper">
+ 	<select id="getUserByUserId" parameterType="int" resultType="com.last.pay.core.db.pojo.UserIfm" >
+		SELECT
+			t1.UserID userId,
+			t1.Score score,
+			t1.Diamond diamond,
+			t1.Experience experience,
+			t1.InfullAmount infullAmount,
+			t1.VIP vip,
+			t1.LockCannon lockCannon,
+			t1.PlayScore playScore,
+			t1.WinScore winScore,
+			t1.PlayTime playTime,
+			t1.VipIntegral vipIntegral,
+			t2.NickName nickName,
+			t2.UserType userType
+		from user t1,account t2
+		where
+			t1.UserID = #{userId} and t1.UserID = t2.UserID
+	</select>
+	<update id="updateUserInfullAmount" parameterType="com.last.pay.core.db.pojo.UserIfm">
+		update user set InfullAmount = InfullAmount + #{infullAmount} where UserID = #{userId}
+	</update>
+	
+ </mapper>

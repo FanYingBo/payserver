@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.last.pay.core.db.mapper.webdb.PayPointMapper">
+
+	<select id="getAllPayPoints" resultType="com.last.pay.core.db.pojo.PayPoint" >
+		SELECT
+			name,money,currency,first_double firstDouble,title,gold,diamond,
+			extra_send extraSend,
+			prop_bag propBag ,
+			channel,limit_day limitDay,sort,type,recommend,promotion,third_pay_type thirdPayType,
+			usd , cny , vnd , mmk, relate_international relateInternational ,thb
+		from PayPoint
+	</select>
+	
+ </mapper>

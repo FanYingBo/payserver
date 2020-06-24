@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.last.pay.core.db.mapper.webdb.ReplacementOrderMapper">
+ 
+ 	<sql id="replacementColumn">
+		id,
+		userId,
+		pointName,
+		payType,
+		money,
+		orderNum,
+		thirdOrderNum,
+		status,
+		errorRemark,
+		errorDesc,
+		ip,
+		realCurrency,
+		channel,
+		platform,
+		optTimes,
+		replaceDate
+	</sql>
+ 	<select id="getReplacementOrdersByStatus" resultType="com.last.pay.core.db.pojo.ReplacementOrder">
+		select 
+			<include refid="replacementColumn"></include>
+		from replacement_order where status = #{status}
+	</select>
+	<select id="getReplacementOrderByFulltextIndex" resultType="com.last.pay.core.db.pojo.ReplacementOrder">
+		select 
+			<include refid="replacementColumn"></include>
+		from replacement_order where `PayType` = #{payType} and match(`errorRemark`) against(#{cardNum})
+	</select>
+	
+	<insert id="insertReplacementOrder" parameterType="com.last.pay.core.db.pojo.ReplacementOrder">
+		insert into 
+			replacement_order 
+			(userId,orderNum,thirdOrderNum,status,errorRemark,errorDesc,pointName,payType,money,logDate,ip,realCurrency,channel,platform) 
+		values
+			(#{userId},#{orderNum},#{thirdOrderNum},#{status},#{errorRemark},#{errorDesc},#{pointName},#{payType},#{money},#{logDate},#{ip},#{realCurrency},#{channel},#{platform})
+	</insert>
+	<update id="updateReplacementOrderSuccess"  parameterType="com.last.pay.core.db.pojo.ReplacementOrder">
+		update replacement_order 
+			set status=#{status},optTimes=#{optTimes},successDate=#{successDate},replaceDate=#{replaceDate}
+		where id=#{id}
+	</update>
+	<update id="updateReplacementOrderFailt"  parameterType="com.last.pay.core.db.pojo.ReplacementOrder">
+		update replacement_order 
+			set status=#{status},optTimes=#{optTimes},replaceDate=#{replaceDate},errorDesc=#{errorDesc}
+		where id=#{id}
+	</update>
+	
+ </mapper>

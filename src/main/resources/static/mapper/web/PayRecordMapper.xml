@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.last.pay.core.db.mapper.webdb.PayOrderMapper">
+
+	<sql id="payOrderColumn">
+		t1.order_num orderNum, 
+		t1.userId, 
+		t1.nickName, 
+		t1.currency, 
+		t1.payType, 
+		t1.platform,
+		t1.channel,
+		t1.ip,
+		t1.third_order_num, 
+		t1.order_date,
+		t1.success_date,
+		t1.money,
+		t1.`status`,
+		t1.pointName,
+		t1.operator, 
+		t1.Note note,
+		t1.realMoney,
+		t1.realCurrency,
+		t1.dynamic_id dynamicId
+	</sql>
+
+	<update id="updatePayOrder" parameterType="com.last.pay.core.db.pojo.PayOrder">
+		update PayOrder set
+			status = #{status},
+			operator = #{operator},
+			success_date = #{success_date},
+			third_order_num = #{third_order_num},
+			realMoney = #{realMoney},
+			realCurrency = #{realCurrency},
+			pointName = #{pointName}
+		where order_num = #{orderNum}
+	</update>
+	<update id="updatePayOrderThirdNum" parameterType="com.last.pay.core.db.pojo.PayOrder">
+		update PayOrder set
+			third_order_num = #{third_order_num}
+		where order_num = #{orderNum}
+	</update>
+	<insert id="insertPayOrder" parameterType="com.last.pay.core.db.pojo.PayOrder">
+		insert into PayOrder 
+		(order_num,userId,nickName,payType,platform,channel,ip,third_order_num,order_date,success_date,status,pointName,Note,realMoney,realCurrency,dynamic_id) 
+		values
+		(#{orderNum},#{userId},#{nickName},#{payType},#{platform},#{channel},#{ip},#{third_order_num},#{order_date},#{success_date},#{status},#{pointName},#{Note},#{realMoney},#{realCurrency},#{dynamicId})
+	</insert>
+	<select id="getPayOrdersByPointName" resultType="com.last.pay.core.db.pojo.PayOrder">
+		select max(t1.order_date) order_date,t1.userId,t1.pointName,t1.status,t1.dynamic_id from PayOrder t1
+		where t1.userId = #{userId} and t1.pointName = #{pointName} and t1.status=1 group by t1.userId,t1.pointName,t1.status,t1.dynamic_id
+	</select>
+	<select id="getPayOrdersByDynamicId" resultType="com.last.pay.core.db.pojo.PayOrder">
+		select max(t1.order_date) order_date,t1.userId,t1.pointName,t1.status,t1.dynamic_id from PayOrder t1
+		where t1.userId = #{userId} and t1.dynamic_id=#{dynamicId} and t1.status=1 group by t1.userId,t1.pointName,t1.status,t1.dynamic_id
+	</select>
+	<select id="getPayOrder" resultType="com.last.pay.core.db.pojo.PayOrder">
+		select <include refid="payOrderColumn"></include> from PayOrder t1
+		where t1.order_num = #{orderNum}
+	</select>
+	<select id="getPayOrderByThirdOrderNumFail" resultType="com.last.pay.core.db.pojo.PayOrder">
+		select <include refid="payOrderColumn"></include> from PayOrder t1
+		where t1.third_order_num = #{thirdOrderNum} and status != 1
+	</select>
+	<select id="getPayOrderByThirdOrderNumSuccess" resultType="com.last.pay.core.db.pojo.PayOrder">
+		select <include refid="payOrderColumn"></include> from PayOrder t1
+		where t1.third_order_num = #{thirdOrderNum} and status = 1
+	</select>
+	<select id="getPayOrderByThirdNum" resultType="com.last.pay.core.db.pojo.PayOrder">
+		select <include refid="payOrderColumn"></include> from PayOrder t1
+		where t1.third_order_num = #{thirdOrderNum}
+	</select>
+	<select id="getPayOrderByFullText" resultType="com.last.pay.core.db.pojo.PayOrder">
+		select <include refid="payOrderColumn"></include> from PayOrder t1
+		where t1.`PayType` = #{payType} and t1.`status` = #{status} and match(t1.`Note`) against(#{text})
+	</select>
+	
+ </mapper>

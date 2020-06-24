@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.last.pay.core.db.mapper.webdb.PayParamMapper">
+ 	<select id="getPayParams" resultType="com.last.pay.core.db.pojo.PayParam" >
+		select param_key paramKey,param_value paramValue from pay_param
+	</select>
+	
+ </mapper>

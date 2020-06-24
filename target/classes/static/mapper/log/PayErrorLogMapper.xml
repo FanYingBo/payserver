@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.last.pay.core.db.mapper.logdb.PayErrorLogMapper">
+	<insert id="insertPayUserLog" useGeneratedKeys="true" keyProperty="id" parameterType="com.last.pay.core.db.pojo.PayErrorLog">
+		insert into pay_error_log 
+			(orderNum,userId,nickName,money,currency,pointName,payType,platform,channel,ip,thirdOrderNum,realMoney,realCurrency,errorInfo,logDate,dynamicId) 
+		values(#{orderNum},#{userId},#{nickName},#{money},#{currency},#{pointName},#{payType},#{platform},#{channel},#{ip},#{thirdOrderNum},#{realMoney},#{realCurrency},#{errorInfo},#{logDate},#{dynamicId})
+	</insert>
+	
+	<select id="getPayErrorLogByOrderNum"  resultType="com.last.pay.core.db.pojo.PayErrorLog">
+		select id,userId,nickname nickName,channel,platform,payType,orderNum,pointName,ip,currency,money,dynamicId from pay_error_log where orderNum = #{orderNum};
+	</select>
+ </mapper>

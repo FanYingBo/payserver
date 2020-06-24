@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.last.pay.core.db.mapper.userdb.UserDBProcedureMapper">
+ 	<update id="updateUserProps" statementType="CALLABLE"  parameterType="com.last.pay.core.db.pojo.call.UpdatePropsProcedure" >
+ 		{call GSP_GP_Only_Update_Prop(#{iUserID,mode=IN},#{iPropID,mode=IN},#{iAmount,mode=IN},#{iType,mode=IN},#{iRelatedInfo,mode=IN},#{errorCode,mode=OUT,jdbcType=INTEGER})}
+ 	</update>
+ 	
+	
+ </mapper>

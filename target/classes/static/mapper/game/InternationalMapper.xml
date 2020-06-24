@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.last.pay.core.db.mapper.gamedb.InternationalMapper">
+	<select id="getInternationalByPrimaryKey" resultType="com.last.model.game.International">
+		select
+			`key`,
+			cn_value cnValue,
+			en_value enValue,
+			mm_value mmValue,
+			vi_value viValue,
+			th_value thValue,
+			id_value idValue,
+			tw_value twValue,
+			hk_value hkValue
+		from
+		international where `key` = #{key}
+	</select>
+	
+	<select id="getAllInternational" resultType="com.last.model.game.International">
+		select
+			`key`,
+			cn_value cnValue,
+			en_value enValue,
+			mm_value mmValue,
+			vi_value viValue,
+			th_value thValue,
+			id_value idValue,
+			tw_value twValue,
+			hk_value hkValue
+		from
+		international
+	</select>
+ </mapper>

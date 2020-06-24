@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.last.pay.core.db.mapper.userdb.UserControlMapper">
+ 	<select id="getUserControl" parameterType="int" resultType="com.last.pay.core.db.pojo.UserControl" >
+		SELECT
+			userId,warHeadIntegral,ticketIntegral,loseScore,winScore,sendScore,eatScore,netScore,shotCount
+		from user_control
+		where
+			userId = #{userId}
+	</select>
+	<update id="updateUserControl">
+		update 
+			user_control 
+		set 
+			warHeadIntegral = #{warHeadIntegral}, 
+			ticketIntegral = #{ticketIntegral}, 
+			loseScore = #{loseScore}, 
+			winScore = #{winScore}, 
+			sendScore = #{sendScore}, 
+			eatScore = #{eatScore}, 
+			netScore = #{netScore}, 
+			shotCount = #{shotCount}
+		where userId = #{userId}
+	</update>
+	
+ </mapper>

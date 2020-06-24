@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.last.pay.core.db.mapper.userdb.UserStatusMapper">
+	<select id="getUserStatus" resultType="com.last.pay.core.db.pojo.UserStatus">
+		SELECT userid,deposit_gold depositGold FROM user_status where userid = #{userId}
+	</select>
+	<update id="updateUseMapPoint" >
+		UPDATE user_status SET use_map_point = 1 WHERE userid = #{userId}
+	</update>
+</mapper>

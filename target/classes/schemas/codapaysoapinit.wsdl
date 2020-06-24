@@ -1,0 +1,439 @@
+<wsdl:definitions
+	xmlns:ns1="http://cxf.apache.org/bindings/xformat"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://ws.airtime.coda.com/airtime/api1.0"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="soap-v1.0"
+	targetNamespace="http://ws.airtime.coda.com/airtime/api1.0">
+	<wsdl:types>
+		<xs:schema
+			xmlns:tns="http://ws.airtime.coda.com/airtime/api1.0"
+			xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			attributeFormDefault="unqualified" elementFormDefault="unqualified"
+			targetNamespace="http://ws.airtime.coda.com/airtime/api1.0">
+			<xs:element name="initRequest" type="tns:initRequest" />
+			<xs:element name="initResult" type="tns:initResult" />
+			<xs:element name="inquiryPaymentRequest"
+				type="tns:inquiryPaymentRequest" />
+			<xs:element name="itemInfo" type="tns:itemInfo" />
+			<xs:element name="paymentResult" type="tns:paymentResult" />
+			<xs:element name="subsResult" type="tns:subsResult" />
+			<xs:element name="subscriptionInfo"
+				type="tns:subscriptionInfo" />
+			<xs:element name="subscriptionPlanInfo"
+				type="tns:subscriptionPlanInfo" />
+			<xs:element name="subscriptionRequest"
+				type="tns:subscriptionRequest" />
+			<xs:element name="subscriptionResult"
+				type="tns:subscriptionResult" />
+			<xs:complexType name="inquiryPaymentRequest">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="apiKey" type="xs:string" />
+					<xs:element name="txnId" type="xs:long" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="paymentResult">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="orderId"
+						type="xs:string" />
+					<xs:element name="profile">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" minOccurs="0"
+									name="entry">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element minOccurs="0" name="key"
+												type="xs:string" />
+											<xs:element minOccurs="0" name="value"
+												type="xs:string" />
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="resultCode" type="xs:short" />
+					<xs:element minOccurs="0" name="resultDesc"
+						type="xs:string" />
+					<xs:element name="totalPrice" type="xs:double" />
+					<xs:element name="txnId" type="xs:long" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="initRequest">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="apiKey" type="xs:string" />
+					<xs:element name="country" type="xs:short" />
+					<xs:element name="currency" type="xs:short" />
+					<xs:element maxOccurs="unbounded" minOccurs="0"
+						name="items" nillable="true" type="tns:itemInfo" />
+					<xs:element minOccurs="0" name="orderId"
+						type="xs:string" />
+					<xs:element name="payType" type="xs:short" />
+					<xs:element name="profile">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" minOccurs="0"
+									name="entry">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element minOccurs="0" name="key"
+												type="xs:string" />
+											<xs:element minOccurs="0" name="value"
+												type="xs:string" />
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="itemInfo">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="code" type="xs:string" />
+					<xs:element minOccurs="0" name="name" type="xs:string" />
+					<xs:element name="price" type="xs:double" />
+					<xs:element name="type" type="xs:short" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType abstract="true"
+				name="abstractCollection">
+				<xs:sequence />
+			</xs:complexType>
+			<xs:complexType abstract="true" name="abstractList">
+				<xs:complexContent>
+					<xs:extension base="tns:abstractCollection">
+						<xs:sequence />
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="arrayList">
+				<xs:complexContent>
+					<xs:extension base="tns:abstractList">
+						<xs:sequence />
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType abstract="true" name="abstractMap">
+				<xs:sequence />
+			</xs:complexType>
+			<xs:complexType name="hashMap">
+				<xs:complexContent>
+					<xs:extension base="tns:abstractMap">
+						<xs:sequence />
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="initResult">
+				<xs:sequence>
+					<xs:element name="profile">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" minOccurs="0"
+									name="entry">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element minOccurs="0" name="key"
+												type="xs:string" />
+											<xs:element minOccurs="0" name="value"
+												type="xs:string" />
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="resultCode" type="xs:short" />
+					<xs:element minOccurs="0" name="resultDesc"
+						type="xs:string" />
+					<xs:element name="txnId" type="xs:long" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="subscriptionRequest">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="APIKey" type="xs:string" />
+					<xs:element name="checkStatusKey" type="xs:int" />
+					<xs:element minOccurs="0" name="checkStatusValue"
+						type="xs:string" />
+					<xs:element name="subscriptionId" type="xs:int" />
+					<xs:element name="subscriptionPlanId" type="xs:int" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="subsResult">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="resultCode"
+						type="xs:short" />
+					<xs:element minOccurs="0" name="resultDesc"
+						type="xs:string" />
+					<xs:element maxOccurs="unbounded" minOccurs="0"
+						name="subscriptionPlanInfo" nillable="true"
+						type="tns:subscriptionPlanInfo" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="subscriptionPlanInfo">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="description"
+						type="xs:string" />
+					<xs:element minOccurs="0" name="interval"
+						type="xs:short" />
+					<xs:element minOccurs="0" name="intervalType"
+						type="xs:byte" />
+					<xs:element minOccurs="0" name="planKeyword"
+						type="xs:string" />
+					<xs:element minOccurs="0" name="planName"
+						type="xs:string" />
+					<xs:element minOccurs="0" name="planStatus"
+						type="xs:string" />
+					<xs:element minOccurs="0" name="price" type="xs:double" />
+					<xs:element minOccurs="0" name="renewalAttempts"
+						type="xs:short" />
+					<xs:element maxOccurs="unbounded" minOccurs="0"
+						name="subscriptionInfo" nillable="true"
+						type="tns:subscriptionInfo" />
+					<xs:element name="subscriptionPlanId" type="xs:int" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="subscriptionInfo">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="lastRenewalTime"
+						type="xs:string" />
+					<xs:element minOccurs="0" name="nextRenewalTime"
+						type="xs:string" />
+					<xs:element minOccurs="0" name="paymentChannel"
+						type="xs:string" />
+					<xs:element name="subscriptionId" type="xs:int" />
+					<xs:element minOccurs="0" name="subscriptionStatus"
+						type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="subscriptionResult">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="resultCode"
+						type="xs:short" />
+					<xs:element minOccurs="0" name="resultDesc"
+						type="xs:string" />
+					<xs:element minOccurs="0" name="subscriptionInfo"
+						type="tns:subscriptionInfo" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="inquiryPaymentResult"
+				type="tns:inquiryPaymentResult" />
+			<xs:complexType name="inquiryPaymentResult">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="arg0"
+						type="tns:inquiryPaymentRequest" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="inquiryPaymentResultResponse"
+				type="tns:inquiryPaymentResultResponse" />
+			<xs:complexType name="inquiryPaymentResultResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="return"
+						type="tns:paymentResult" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="init" type="tns:init" />
+			<xs:complexType name="init">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="arg0"
+						type="tns:initRequest" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="initResponse" type="tns:initResponse" />
+			<xs:complexType name="initResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="return"
+						type="tns:initResult" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="getActiveSubs" type="tns:getActiveSubs" />
+			<xs:complexType name="getActiveSubs">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="arg0"
+						type="tns:subscriptionRequest" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="getActiveSubsResponse"
+				type="tns:getActiveSubsResponse" />
+			<xs:complexType name="getActiveSubsResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="return"
+						type="tns:subsResult" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="cancelSubs" type="tns:cancelSubs" />
+			<xs:complexType name="cancelSubs">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="arg0"
+						type="tns:subscriptionRequest" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="cancelSubsResponse"
+				type="tns:cancelSubsResponse" />
+			<xs:complexType name="cancelSubsResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="return"
+						type="tns:subscriptionResult" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="checkSubsStatus"
+				type="tns:checkSubsStatus" />
+			<xs:complexType name="checkSubsStatus">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="arg0"
+						type="tns:subscriptionRequest" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="checkSubsStatusResponse"
+				type="tns:checkSubsStatusResponse" />
+			<xs:complexType name="checkSubsStatusResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="return"
+						type="tns:subscriptionResult" />
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="inquiryPaymentResultResponse">
+		<wsdl:part element="tns:inquiryPaymentResultResponse"
+			name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="checkSubsStatusResponse">
+		<wsdl:part element="tns:checkSubsStatusResponse"
+			name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="cancelSubs">
+		<wsdl:part element="tns:cancelSubs" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getActiveSubs">
+		<wsdl:part element="tns:getActiveSubs" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="cancelSubsResponse">
+		<wsdl:part element="tns:cancelSubsResponse"
+			name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getActiveSubsResponse">
+		<wsdl:part element="tns:getActiveSubsResponse"
+			name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="initResponse">
+		<wsdl:part element="tns:initResponse" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="inquiryPaymentResult">
+		<wsdl:part element="tns:inquiryPaymentResult"
+			name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="init">
+		<wsdl:part element="tns:init" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="checkSubsStatus">
+		<wsdl:part element="tns:checkSubsStatus" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="Payment">
+		<wsdl:operation name="inquiryPaymentResult">
+			<wsdl:input message="tns:inquiryPaymentResult"
+				name="inquiryPaymentResult">
+			</wsdl:input>
+			<wsdl:output message="tns:inquiryPaymentResultResponse"
+				name="inquiryPaymentResultResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="init">
+			<wsdl:input message="tns:init" name="init">
+			</wsdl:input>
+			<wsdl:output message="tns:initResponse"
+				name="initResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getActiveSubs">
+			<wsdl:input message="tns:getActiveSubs"
+				name="getActiveSubs">
+			</wsdl:input>
+			<wsdl:output message="tns:getActiveSubsResponse"
+				name="getActiveSubsResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="cancelSubs">
+			<wsdl:input message="tns:cancelSubs" name="cancelSubs">
+			</wsdl:input>
+			<wsdl:output message="tns:cancelSubsResponse"
+				name="cancelSubsResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="checkSubsStatus">
+			<wsdl:input message="tns:checkSubsStatus"
+				name="checkSubsStatus">
+			</wsdl:input>
+			<wsdl:output message="tns:checkSubsStatusResponse"
+				name="checkSubsStatusResponse">
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="soap-v1.0SoapBinding"
+		type="tns:Payment">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="inquiryPaymentResult">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="inquiryPaymentResult">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="inquiryPaymentResultResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="init">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="init">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="initResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getActiveSubs">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="getActiveSubs">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getActiveSubsResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="cancelSubs">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="cancelSubs">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="cancelSubsResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="checkSubsStatus">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="checkSubsStatus">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="checkSubsStatusResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="soap-v1.0">
+		<wsdl:port binding="tns:soap-v1.0SoapBinding" name="api">
+			<soap:address
+				location="http://localhost:8080/airtime/api/soap/v1.0" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
